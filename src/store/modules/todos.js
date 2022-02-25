@@ -23,6 +23,15 @@ const actions = {
         await axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`);
 
         commit('removeTodo', id);
+    },
+    async filterTodo({ commit }, e){
+        //get the selected options
+        const limit = parseInt(e.target.options[e.target.options.selectedIndex].innerText);
+
+        const res = await axios.get(`https://jsonplaceholder.typicode.com/todos?_limit=${limit}`);
+
+        commit('setTodo', res.data);
+        
     }
 };
 
